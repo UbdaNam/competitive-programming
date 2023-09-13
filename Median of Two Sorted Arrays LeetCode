@@ -1,0 +1,28 @@
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function(num1, num2) {
+  let len = num1.length + num2.length;
+  let minNum1 = num1[0],
+    minNum2 = num2[0],
+    sortedResult = [];
+  let mid = Math.floor(len / 2);
+  for (let i = 0; i <= mid; i++) {
+    if (!(num1.length == 0 || num2.length == 0)) {
+      if (minNum1 <= minNum2) {
+        sortedResult.push(num1.shift());
+        minNum1 = num1[0];
+      } else {
+        sortedResult.push(num2.shift());
+        minNum2 = num2[0];
+      }
+    } else if (num2.length == 0) {
+      sortedResult.push(num1.shift());
+    } else if (num1.length == 0) {
+      sortedResult.push(num2.shift());
+    }
+  }
+    return len % 2 == 0 ? (sortedResult.pop() + sortedResult.pop()) / 2 : sortedResult.pop()
+};
